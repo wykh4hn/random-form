@@ -1,5 +1,8 @@
 :root {
-    --pink-nav: #ff9fab;
+    /* sampled straight off the top edge of header1.png so the bar melts into it */
+    --nav-bg: #ffe1e9;
+    --nav-ink: #c2185b;
+    --pink-brand: #ff9fab;
     --pink-soft: #fedde4;
     --cream: #f8f4eb;
     --ink: #1a1a1a;
@@ -15,15 +18,16 @@ body {
     color: var(--ink);
 }
 
-/* ---------- menu bar ---------- */
+/* navbar- flat on purpose ~no shadow, no hover colour, nothing */
 #navbar {
-    --bs-navbar-color: var(--ink);
-    --bs-navbar-hover-color: #fff;
-    --bs-navbar-active-color: #fff;
-    --bs-navbar-brand-color: var(--ink);
-    --bs-navbar-brand-hover-color: var(--ink);
-    background: var(--pink-nav);
-    box-shadow: 0 2px 12px rgba(255, 159, 171, .35);
+    --bs-navbar-color: var(--nav-ink);
+    --bs-navbar-hover-color: var(--nav-ink);
+    --bs-navbar-active-color: var(--nav-ink);
+    --bs-navbar-brand-color: var(--nav-ink);
+    --bs-navbar-brand-hover-color: var(--nav-ink);
+    --bs-navbar-toggler-border-color: var(--nav-ink);
+    --bs-navbar-toggler-focus-width: 0;
+    background: var(--nav-bg);
 }
 
 #navbar .navbar-brand {
@@ -32,19 +36,20 @@ body {
 }
 
 #navbar .nav-link {
-    font-weight: 400;
+    font-weight: 500;
     padding-inline: .9rem;
 }
 
-#navbar .navbar-toggler {
-    border-color: rgba(26, 26, 26, .35);
+#navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c2185b' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* ---------- the stacked canva slides ---------- */
+
 .slide {
     /* img is inline by default, the leftover line-height leaves a white gap between slides */
     line-height: 0;
     font-size: 0;
+    overflow: hidden;
     /* so the sticky navbar doesn't sit on top of a section we jumped to */
     scroll-margin-top: 62px;
 }
@@ -53,9 +58,11 @@ body {
     display: block;
     width: 100%;
     height: auto;
+    /* canva exported a ~4px grey frame on the top edge, shave it off */
+    margin-top: -.5%;
 }
 
-/* ---------- form section ---------- */
+/*form */
 .slide--form {
     position: relative;
 }
@@ -79,7 +86,7 @@ body {
     margin-bottom: .25rem;
     font-size: 1.6rem;
     font-weight: 600;
-    color: var(--pink-nav);
+    color: var(--pink-brand);
 }
 
 .contact-card__sub {
@@ -102,7 +109,7 @@ body {
 }
 
 .contact-card .form-control:focus {
-    border-color: var(--pink-nav);
+    border-color: var(--pink-brand);
     box-shadow: 0 0 0 .2rem rgba(255, 159, 171, .25);
 }
 
@@ -114,7 +121,7 @@ body {
     border: none;
     border-radius: 14px;
     padding: .65rem 1rem;
-    background: var(--pink-nav);
+    background: var(--pink-brand);
     color: #fff;
     font-weight: 500;
 }
@@ -148,7 +155,7 @@ body {
     aspect-ratio: 1 / 1;
 }
 
-/* ---------- footer ---------- */
+/*footer */
 .site-footer {
     background: var(--pink-soft);
     color: var(--ink);
@@ -227,7 +234,6 @@ body {
     text-align: center;
 }
 
-/* ---------- narrow screens: the overlay would cover the whole picture ---------- */
 @media (max-width: 991px) {
     .contact-card,
     .model-slot {
