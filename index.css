@@ -73,44 +73,89 @@ body {
     top: 50%;
     transform: translateY(-50%);
     width: 36%;
-    padding: 2rem 1.9rem;
+    padding: clamp(1.1rem, 1.8vw, 2rem) clamp(1rem, 1.7vw, 1.9rem);
     border-radius: 28px;
     background: var(--card);
     backdrop-filter: blur(6px);
     box-shadow: 0 12px 32px rgba(255, 159, 171, .28);
     line-height: 1.5;
-    font-size: 1rem;
+    font-size: clamp(.8rem, .95vw, 1rem);
+    max-height: 94%;
+    overflow-y: auto;
 }
 
 .contact-card__title {
     margin-bottom: .25rem;
-    font-size: 1.6rem;
+    font-size: clamp(1.15rem, 1.6vw, 1.6rem);
     font-weight: 600;
     color: var(--pink-brand);
 }
 
 .contact-card__sub {
-    margin-bottom: 1.4rem;
-    font-size: .9rem;
+    margin-bottom: clamp(.7rem, 1.2vw, 1.4rem);
+    font-size: clamp(.75rem, .85vw, .9rem);
     color: #6b6b6b;
 }
 
+/* tighter than bootstrap's mb-3 on small screens, same as it on big ones */
+.contact-card form .mb-3 {
+    margin-bottom: clamp(.5rem, .9vw, 1rem);
+}
+
 .contact-card .form-label {
-    margin-bottom: .3rem;
-    font-size: .875rem;
+    margin-bottom: .25rem;
+    font-size: clamp(.78rem, .85vw, .875rem);
     font-weight: 500;
 }
 
 .contact-card .form-control {
     border: 1.5px solid var(--pink-soft);
     border-radius: 14px;
-    padding: .6rem .9rem;
+    padding: clamp(.38rem, .55vw, .6rem) .9rem;
     background: rgba(255, 255, 255, .9);
 }
 
 .contact-card .form-control:focus {
     border-color: var(--pink-brand);
     box-shadow: 0 0 0 .2rem rgba(255, 159, 171, .25);
+}
+
+.contact-card .form-control.is-invalid {
+    border-color: #e8879a;
+    /* bootstrap's warning icon fights the rounded pink inputs */
+    background-image: none;
+    padding-right: .9rem;
+}
+
+.contact-card .form-control.is-invalid:focus {
+    border-color: #d1435b;
+    box-shadow: 0 0 0 .2rem rgba(209, 67, 91, .18);
+}
+
+.contact-card .invalid-feedback {
+    font-size: .8em;
+    color: #d1435b;
+}
+
+/* the little asterisk next to a required label */
+.req {
+    color: var(--pink-brand);
+}
+
+.char-count {
+    margin: .25rem 0 0;
+    font-size: .75em;
+    color: #9a9a9a;
+    text-align: right;
+}
+
+/* honeypot ~offscreen instead of display:none, some bots skip hidden inputs */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 
 .contact-card textarea.form-control {
@@ -130,6 +175,17 @@ body {
 .btn-send:focus {
     background: #ff8797;
     color: #fff;
+}
+
+.btn-send:disabled {
+    background: var(--pink-brand);
+    color: #fff;
+    opacity: .72;
+}
+
+.btn-send .spinner-border {
+    margin-right: .45rem;
+    vertical-align: -.125em;
 }
 
 .form-msg {
@@ -234,7 +290,7 @@ body {
     text-align: center;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1199.98px) {
     .contact-card,
     .model-slot {
         position: static;
@@ -245,12 +301,16 @@ body {
     .contact-card {
         margin: -2.5rem 5% 2rem;
         width: auto;
+        max-height: none;
+        overflow-y: visible;
     }
 
     .model-slot {
         aspect-ratio: 16 / 9;
     }
+}
 
+@media (max-width: 991px) {
     .footer-grid {
         grid-template-columns: 1fr 1fr;
     }
